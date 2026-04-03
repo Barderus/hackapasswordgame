@@ -14,9 +14,10 @@ def inputValidation(password):
     if " " in password:
         return True
     
-#   # make sure the sting has at least a
-#   # character and the length is at most 16 character more
-    elif 1 > len(password) > 16:
+    # make sure the string has at least 1 character 
+    # and at most 16 characters
+    elif len(password) < 1 or len(password) > 16:
         return True
+    
     else:
         return False
