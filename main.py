@@ -83,8 +83,8 @@ def main():
 
     leaked_matches = existingPasswordChecker(password, [])
     english_matches = englishWordsChecker(password, [])
-    crack_time_seconds = entropy(password, leaked_matches, english_matches)
-    save_result_to_json(user_name, crack_time_seconds)
+    crack_times = entropy(password, leaked_matches, english_matches)
+    save_result_to_json(user_name, crack_times[100])
 
     print()
     print(f"Password length: {password_size}")
@@ -100,8 +100,11 @@ def main():
     else:
         print("Leaked password fragments found: none")
 
-    print(f"Estimated crack time: {crack_time_seconds:.6f} seconds")
-    print(f"Estimated crack time: {get_time_to_crack(crack_time_seconds)}")
+    print("\nEstimated crack time by attacker type:")
+    print(f"10 GPUs (run of the mill hacker): {get_time_to_crack(crack_times[10])}")
+    print(f"100 GPUs (dedicated attacker): {get_time_to_crack(crack_times[100])}")
+    print(f"1000 GPUs (criminal organization): {get_time_to_crack(crack_times[1000])}")
+    print(f"1000000 GPUs (nation state): {get_time_to_crack(crack_times[1000000])}")
 
 
 if __name__ == "__main__":
